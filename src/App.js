@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes, Navigate } from "react-router-dom";
+import Main from "./components/Main/main";
+import Register from "./components/Register/register";
+import Login from "./components/Login/login";
+import EmailVerify from "./components/EmailVerify/emailVerify";
+import ForgotPassword from "./components/ForgotPassword/forgotPassword";
+import PasswordReset from "./components/PasswordReset/passwordReset";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const user = localStorage.getItem("token");
+
+	return (
+		<Routes>
+			{user && <Route path="/" exact element={<Main />} />}
+			<Route path="/register" exact element={<Register />} />
+			<Route path="/login" exact element={<Login />} />
+			<Route path="/" element={<Navigate replace to="/login" />} />
+			<Route path="/users/:id/verify/:token" element={<EmailVerify />}/>
+			<Route path="/forgot-password" element={<ForgotPassword />} />
+			<Route path="/password-reset/:id/:token" element={<PasswordReset />} />	
+		</Routes>
+	);
 }
 
 export default App;
