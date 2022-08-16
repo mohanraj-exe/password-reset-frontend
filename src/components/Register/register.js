@@ -23,7 +23,7 @@ const Register = () => {
 		e.preventDefault();
 
 		try {
-			const url = "http://localhost:8080/api/users";
+			const url = "https://password-reset-backen.herokuapp.com/api/users";
 			const { data: res } = await axios.post(url, data);
 			// navigate("/login")
 			setMsg(res.message)
